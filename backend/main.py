@@ -190,7 +190,6 @@ async def compile_latex(
         # ==============
         # 5. 调用 latexmk 编译
         #    根据 engine 选择 -xelatex / -pdflatex / -lualatex
-        #    并显式关闭 shell-escape
         # ==============
         engine_flag = f"-{engine}"
         cmd = [
@@ -198,7 +197,6 @@ async def compile_latex(
             engine_flag,
             "-interaction=nonstopmode",
             "-halt-on-error",
-            "-shell-escape=0",  # 显式禁用 shell-escape
             tex_name,
         ]
         print(f"[compile] Running command: {' '.join(cmd)}")
