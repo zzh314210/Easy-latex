@@ -3,11 +3,10 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   reactStrictMode: true,
 
-  // 挂在 /texlive 子路径
+  // 把页面和静态资源都挂在 /texlive 前缀下
   basePath: "/texlive",
-
-  // 静态资源前缀也加 /texlive
-  assetPrefix: "/texlive",
+  // 这里不要再加 assetPrefix，否则路径会变成 /texlive/texlive/_next/...
+  // assetPrefix: "/texlive",
 };
 
 export default nextConfig;

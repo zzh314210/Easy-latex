@@ -1,0 +1,9 @@
+services:
+  texlive-all:
+    build: .
+    container_name: texlive-web
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./jobs:/jobs
+    restart: unless-stopped

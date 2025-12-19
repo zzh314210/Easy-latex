@@ -1,0 +1,28 @@
+# Git
+.git
+.gitignore
+
+# Node / Next.js build artifacts
+node_modules
+.next
+out
+
+# Python virtualenvs
+.venv
+venv
+env
+
+# Logs & temp
+*.log
+logs
+jobs
+
+# Editor / OS
+.vscode
+.idea
+.DS_Store
+Thumbs.db
+
+# Local env files
+.env
+.env.*.local
