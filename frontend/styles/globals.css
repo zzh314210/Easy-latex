@@ -1,0 +1,67 @@
+
+/* ------------------------------
+   Tailwind base layers（必须放最上面）
+--------------------------------*/
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ------------------------------
+   CSS Variables - Light / Dark
+--------------------------------*/
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+/* ------------------------------
+   Base HTML / Body
+--------------------------------*/
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ------------------------------
+   CSS Reset / Normalize
+--------------------------------*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ------------------------------
+   Dark mode color scheme hint
+--------------------------------*/
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+}
+
+

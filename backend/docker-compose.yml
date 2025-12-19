@@ -1,0 +1,15 @@
+version: "3.8"
+
+services:
+  texlive-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: texlive-api
+    ports:
+      - "9999:9999"          # 宿主机 9999 → 容器 9999
+    volumes:
+      - ./jobs:/jobs         # 可选：临时编译目录，方便你调试看日志
+    environment:
+      - TZ=Asia/Shanghai
+    restart: unless-stopped

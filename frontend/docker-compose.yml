@@ -1,0 +1,10 @@
+services:
+  ai-teaching-frontend:
+    image: frontend-base:latest
+    container_name: texlive-frontend
+    working_dir: /app
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./frontend:/app
+    command: sh -c "tail -f /dev/null"

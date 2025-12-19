@@ -1,0 +1,185 @@
+# 启动texlive容器
+sudo docker run --rm -it -v /data/thesis/thesis-src:/workspace -w /workspace texlive/texlive:latest bash
+
+# 编译latex
+xelatex -interaction=nonstopmode -halt-on-error main.tex
+bibtex main
+xelatex -interaction=nonstopmode -halt-on-error main.tex
+xelatex -interaction=nonstopmode -halt-on-error main.tex
+
+
+
+# 实例化容器启动
+
+docker compose up -d
+
+# 进入容器
+
+docker exec -it texlive-frontend bash
+
+# 如果已有项目，可以在容器里 npm install / npm run dev
+
+# 设置淘宝镜像源
+
+npm config set registry https://registry.npmmirror.com
+
+# 搭建前端脚手架
+
+npx create-next-app@latest . --ts --use-npm --no-tailwind
+
+# 安装MUI
+
+npm install @mui/material @emotion/react @emotion/styled @mui/icons-material
+
+# 安装动效库
+
+npm install framer-motion motion
+
+# 安装Tailwind
+
+npm install -D tailwindcss@3.4.14 postcss autoprefixer
+
+# 初始化
+
+npx tailwindcss init -p
+
+# 修改tailwind.config.js
+
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/**/*.{js,ts,jsx,tsx,mdx}",
+  ],
+  theme: { extend: {} },
+  plugins: [],
+};
+
+
+# app/global.css替换
+
+/* ------------------------------
+   Tailwind base layers（必须放最上面）
+--------------------------------*/
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ------------------------------
+   CSS Variables - Light / Dark
+--------------------------------*/
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+/* ------------------------------
+   Base HTML / Body
+--------------------------------*/
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ------------------------------
+   CSS Reset / Normalize
+--------------------------------*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ------------------------------
+   Dark mode color scheme hint
+--------------------------------*/
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+}
+
+
+
+
+# 安装 Aceternity UI
+
+npm install clsx tailwind-merge aceternity-ui
+
+# 安装 Nextjs适配包
+
+npm install @mui/material-nextjs
+
+# run起来
+
+npm run dev
+
+# 测试用的index.tsx
+
+import { motion } from "framer-motion";
+
+export default function Home() {
+  return (
+    <main className="min-h-screen w-full bg-black text-white flex items-center justify-center">
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="max-w-3xl px-6 text-center"
+      >
+        {/* 标题 */}
+        <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">
+          AI Mail Assistant
+        </h1>
+
+        {/* 副标题 */}
+        <p className="text-lg md:text-xl text-gray-300 mb-10 leading-relaxed">
+          自动识别邮件中的任务、截止时间与关键信息，
+          <br />
+          帮你从混乱邮箱中快速理清重点。
+        </p>
+
+        {/* 按钮区域 */}
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <button className="px-8 py-3 rounded-xl bg-white text-black font-medium hover:bg-gray-200 transition">
+            开始使用
+          </button>
+          <button className="px-8 py-3 rounded-xl border border-white/30 text-white hover:bg-white/10 transition">
+            查看示例
+          </button>
+        </div>
+      </motion.div>
+    </main>
+  );
+}
+
+
+# 指定端口跑服务
+
+PORT=3001 npm run dev
